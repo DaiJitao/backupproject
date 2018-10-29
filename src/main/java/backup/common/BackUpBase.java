@@ -13,14 +13,11 @@ public class BackUpBase {
 
     static {
         Configuration configuration = Configuration.getInstance();
-        try {
-            configuration.init();
-            String IP = configuration.getIP("ip");
-            String PORT = configuration.getProperty("port");
-            CommVault_SERVER_URL = "http://" + IP + ":" + PORT;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        configuration.init();
+        String IP = configuration.getIP("ip");
+        String PORT = configuration.getProperty("port");
+        CommVault_SERVER_URL = "http://" + IP + ":" + PORT;
+
     }
 
     public HTTPUtil httpUtil = HTTPUtil.getInstance();

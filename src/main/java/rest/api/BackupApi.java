@@ -1,5 +1,8 @@
 package rest.api;
 
+import backup.Client.ClientOp;
+import backup.common.ConstantURL;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -15,16 +18,21 @@ public class BackupApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON) // 返回类型
     public String getName(@PathParam("id") String id) {
+        ConstantURL url = new ConstantURL();
+        //System.out.println(url.getClass().getClassLoader().getResource("").toString());
+        System.out.println(url.getName());
         System.out.println("id=" + id);
+        System.out.println(System.getProperty("user.dir")); //获取用户的工作目录
         return id;
     }
 
-    @Path("/getName")
+    @Path("/clients")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getNames() {
-        System.out.println("dai");
-        return "dai";
+        ClientOp clientOp = new ClientOp();
+        String result = clientOp.getClients();
+        return result;
     }
 }
 

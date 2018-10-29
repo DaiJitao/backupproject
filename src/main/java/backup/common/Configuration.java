@@ -1,5 +1,7 @@
 package backup.common;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +30,7 @@ public class Configuration {
         //System.out.println(Main.class.getClassLoader().getResource("")); // 加载根项目下的文件myTestDemo/name.filetype
     }
 
-    public void init() throws Exception {
+    public void init()  {
         String settingFile = "conf.properties";
         init(settingFile);
     }
@@ -36,16 +38,23 @@ public class Configuration {
     /**
      * 初始化配置文件
      */
-    public void init(String fileName) throws Exception {
-        if (null == fileName || fileName.trim().length() == 0) {
-            throw new Exception("文件名[" + fileName + "]不可为空");
+    public void init(String fileName)  {
+        String name = fileName;
+        try {
+            if (null == fileName || fileName.trim().length() == 0) {
+                throw new Exception("文件名[" + fileName + "]不可为空");
+            }
+            fileName = getPath() + fileName;
+            // InputStream in = this.getClass().getClassLoader().getResourceAsStream(fileName);
+            InputStream in = new FileInputStream(new File(fileName));
+            if (in == null) {
+                // String path = this.getClass().getClassLoader().getResource("").getPath();
+                throw new Exception("在目录[" + fileName + "]下找不到[" + name + "]文件");
+            }
+            this.properties.load(in);
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        InputStream in = this.getClass().getClassLoader().getResourceAsStream(fileName);
-        if (in == null) {
-            String path = toString().getClass().getClassLoader().getResource("").getPath();
-            throw new Exception("在目录[" + path + "]下找不到[" + fileName + "]文件");
-        }
-        this.properties.load(in);
     }
 
     public String getProperty(String key) {
@@ -89,5 +98,13 @@ public class Configuration {
         String token = Token.getToken(initUser());
         headers.put("Authtoken", token);
         return headers;
+    }
+
+    private String getPath(){
+        String path = System.getProperty("user.dir");
+        File file = new File(path);
+        File parent = file.getParentFile();
+        String result = parent.getPath() + "\\conf\\";
+        return result;
     }
 }

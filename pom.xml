@@ -47,7 +47,7 @@
     </dependencies>
 
     <build>
-        <finalName>backupDemo</finalName> <!-- 指定了打包成backupDemo.jar djtDemo.jar, djtDemo.zip文件 -->
+        <!-- <finalName>backupDemo</finalName> --> <!-- 指定了打包成backupDemo.jar djtDemo.jar, djtDemo.zip文件 -->
 
 
         <plugins>
@@ -75,7 +75,7 @@
                     <archive>
                         <manifest>
                             <!-- <mainClass>rest.api.HelloWorld</mainClass> --> <!--指定main方法入口的class-->
-                            <mainClass>app.AppServer</mainClass>
+                            <mainClass>app.launcher.AppServer</mainClass>
                             <!-- 在jar包的MANIFEST.MF文件中生成Class-Path属性 -->
                             <addClasspath>true</addClasspath>
                         </manifest>

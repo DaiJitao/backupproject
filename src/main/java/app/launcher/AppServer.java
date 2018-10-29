@@ -1,5 +1,7 @@
 package app.launcher;
 
+import backup.Client.ClientOp;
+import backup.common.Configuration;
 import com.sun.jersey.spi.container.servlet.ServletContainer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -13,8 +15,13 @@ public class AppServer {
         AppServer server = new AppServer();
         server.start();
     }
-    private void start() throws Exception{
-        Server server = new Server(8080); // 监听8282端口
+
+    private void start() throws Exception {
+        Configuration configuration = Configuration.getInstance();
+        String configFile = "server.properties";
+        configuration.init(configFile);
+        int port = Integer.valueOf(configuration.getProperty("PORT"));
+        Server server = new Server(port); // 监听端口
         ServletHolder servlet = new ServletHolder(ServletContainer.class);
         // 设置初始化参数
         servlet.setInitParameter("com.sun.jersey.config.property.resourceConfigClass", "com.sun.jersey.api.core.PackagesResourceConfig");
@@ -22,8 +29,9 @@ public class AppServer {
         servlet.setInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true"); // 自动将对象映射成json返回
         ServletContextHandler handler = new ServletContextHandler(ServletContextHandler.SESSIONS);
         handler.setContextPath("/");
-        handler.addServlet(servlet, "/*"); server.setHandler(handler);
+        handler.addServlet(servlet, "/*");
+        server.setHandler(handler);
         server.start();
-        System.out.println("start...in 8282");
+        System.out.println("start...in 8080");
     }
 }
