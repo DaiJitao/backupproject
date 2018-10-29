@@ -1,2 +1,16 @@
+backup\utils\XMLUtil.class
+backup\job\JobFilter.class
+backup\common\Configuration.class
+backup\common\Token.class
+backup\utils\ParamUtil.class
+backup\common\ConstantURL.class
+backup\utils\Demo.class
+backup\common\BackUpBase.class
+backup\job\JobOp.class
 rest\api\BackupApi.class
 app\launcher\AppServer.class
+backup\utils\HTTPUtil.class
+backup\Client\ClientOp.class
+backup\utils\TimeProcessor.class
+backup\job\JobCategory.class
+backup\utils\BackupResponse.class

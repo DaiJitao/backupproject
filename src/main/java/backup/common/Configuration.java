@@ -104,7 +104,7 @@ public class Configuration {
         String path = System.getProperty("user.dir");
         File file = new File(path);
         File parent = file.getParentFile();
-        String result = parent.getPath() + "\\conf\\";
+        String result = parent.getPath() + File.separator + "conf" + File.separator;
         return result;
     }
 }

@@ -14,6 +14,7 @@ public class AppServer {
     public static void main(String[] args) throws Exception {
         AppServer server = new AppServer();
         server.start();
+        System.out.println(Thread.currentThread().getId());
     }
 
     private void start() throws Exception {
@@ -32,6 +33,6 @@ public class AppServer {
         handler.addServlet(servlet, "/*");
         server.setHandler(handler);
         server.start();
-        System.out.println("start...in 8080");
+        System.out.println("start...in " + port);
     }
 }

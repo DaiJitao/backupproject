@@ -2,12 +2,15 @@ package rest.api;
 
 import backup.Client.ClientOp;
 import backup.common.ConstantURL;
+import backup.job.JobOp;
+import backup.utils.BackupResponse;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * Created by daijitao on 2018/10/25.
@@ -33,6 +36,24 @@ public class BackupApi {
         ClientOp clientOp = new ClientOp();
         String result = clientOp.getClients();
         return result;
+    }
+
+    @Path("/jobs/{id}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getJobByid(@PathParam("id") String jobId) {
+        JobOp jobOp = new JobOp();
+        String result = null;
+        try {
+            result = jobOp.getJobById(jobId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (result != null){
+            return Response.status(Response.Status.OK).entity(result).build();
+        }
+        return Response.serverError().build();
+
     }
 }
 

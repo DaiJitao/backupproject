@@ -15,5 +15,6 @@ public class Demo {
 
         System.out.println(path0);
         System.out.println(parentFile.getPath() + "\\conf\\");
+        System.out.println(Integer.valueOf("op"));
     }
 }

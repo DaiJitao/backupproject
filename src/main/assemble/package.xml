@@ -19,6 +19,10 @@
             <outputDirectory>logs</outputDirectory>
         </fileSet>
         <fileSet>
+            <directory>src/main/resources</directory>
+            <outputDirectory>resources</outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>src/main/work</directory>
             <outputDirectory>work</outputDirectory> <!-- 如果没有work目录， 他就略过-->
         </fileSet>
