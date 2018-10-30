@@ -14,7 +14,6 @@ public class AppServer {
     public static void main(String[] args) throws Exception {
         AppServer server = new AppServer();
         server.start();
-        System.out.println(Thread.currentThread().getId());
     }
 
     private void start() throws Exception {
